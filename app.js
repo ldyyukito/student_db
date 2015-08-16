@@ -1,10 +1,16 @@
- // var array = require("./array.js");
- // var sort = require('./sort.js');
+ var getNewArray = require('./sort.js');
   var express = require('express');
  var mysql = require('mysql');
 
  var app = express();
  var connection;
+
+ var hbs = require('hbs');
+ app.set('view engine', 'html');
+ app.engine('html', hbs.__express);
+
+ app.use(express.static('public'));
+ app.use(express.static('bower_components'));
 
  app.get('*', function(res, req, next) {
    connection = mysql.createConnection({
@@ -24,12 +30,13 @@
      function(err, rows) {
        if (err) throw err;
        array = formArray(rows);
-       console.log(array);
+       res.render('index', {
+         str: array
+       });
+     connection.end();
+      //console.log(array);
      });
-     res.render('index', {
-       str: array
-     });
-   connection.end();
+
 
  });
 
@@ -52,26 +59,12 @@
    return result;
  }
 
- // app.get('/', function(req, res) {
- //   res.render('index', {
- //     str: array
- //   });
- // });
-
-
- var hbs = require('hbs');
- app.set('view engine', 'html');
- app.engine('html', hbs.__express);
-
- app.use(express.static('public'));
- app.use(express.static('bower_components'));
-
-
-
- // app.get('/scores', function(req, res) {
- //   var sortKey = req.query.sortKey;
- //   var orderKey = req.query.orderKey;
- //   res.send(sort(sortKey, orderKey, array));
- // });
+ app.get('/scores', function(req, res) {
+   connection.query('select * from student_info, scores, courses where student_info.student_id=scores.student_id and scores.course_id=courses.course_id;', function(err, rows) {
+     var sortKey = req.query.sortKey;
+   var orderKey = req.query.orderKey;
+   res.send(getNewArray(sortKey, orderKey, rows));
+ });
+ });
 
  app.listen(3000);
