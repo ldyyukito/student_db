@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="jquery/dist/jquery.js" >
+  </script>
+</head>
+<body>
+  <div class = "lala" >
+
+    <table  class = "strip" id ="score">
+    <thead>
+      <th data-id="name" data-order = "asc">姓名</th>
+      <th data-id="chinese" data-order = "asc">语文</th>
+      <th data-id="math" data-order = "dec">数学</th>
+      <th data-id="english" data-order = "dec">英语</th>
+      <th data-id="do" data-order = "dec"> 操作 </th>
+    </thead>
+
+    <tbody id = "sc">
+        {{#each str}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{Chinese}}</td>
+          <td>{{Math}}</td>
+          <td>{{English}}</td>
+          <td > <input type="button" class="delete"  data-id="{{id}}" value="删除"> </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    </table>
+      <input type="button" id ="add" value="增加">
+  </div>
+
+</body>
+<script src ="main.js">
+</script>
+</html>

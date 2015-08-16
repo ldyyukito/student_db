@@ -1,0 +1,15 @@
+.strip {
+  border-collapse: collapse;
+  border: 1px solid #000;
+  width: 980px;
+  text-align: center;
+  margin: auto;
+  border-right-style: none;
+  border-left-style: none;
+}
+thead {
+  background: blue;
+}
+.strip tbody tr:nth-child(odd) {
+  background-color: pink;
+}
