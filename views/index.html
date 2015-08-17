@@ -12,14 +12,14 @@
 
     <table  class = "strip" id ="score">
     <thead>
-      <th data-id="id" data-order = "asc">姓名</th>
+      <th data-id="id" data-order = "asc">学号</th>
       <th data-id="name" data-order = "asc">姓名</th>
       <th data-id="Chinese" data-order = "asc">语文</th>
       <th data-id="Math" data-order = "dec">数学</th>
       <th data-id="English" data-order = "dec">英语</th>
       <th data-id="do" data-order = "dec"> 操作 </th>
     </thead>
-
+    <br>
     <tbody id = "sc">
         {{#each str}}
         <tr  id ={{id}}>
@@ -28,12 +28,34 @@
           <td>{{Chinese}}</td>
           <td>{{Math}}</td>
           <td>{{English}}</td>
-          <td class ='mmd' data-id={{id}}> 删除 </td>
+          <td class ='delete' data-id={{id}}> 删除 </td>
         </tr>
       {{/each}}
     </tbody>
+<br>
+<tfoot>
+      <tr class="add-info">
+        <td>
+        <input id="id" type="text" value="请输入学号">
+        </td>
+        <td>
+        <input id="name" type="text" value="请输入姓名">
+        </td>
+        <td>
+        <input id="chinese" type="text" value="请输语文成绩">
+        </td>
+        <td>
+        <input id="math" type="text" value="请输数学成绩">
+        </td>
+        <td>
+        <input id="english" type="text"value="请输英语成绩" >
+        </td>
+        <td>
+          <input type="button" id='add' value="添加">
+        </td>
+      </tr>
+    </tfoot>
     </table>
-      <input type="button" id ="add" value="增加">
   </div>
 
 </body>
