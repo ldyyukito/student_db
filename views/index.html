@@ -12,6 +12,7 @@
 
     <table  class = "strip" id ="score">
     <thead>
+      <th data-id="id" data-order = "asc">姓名</th>
       <th data-id="name" data-order = "asc">姓名</th>
       <th data-id="Chinese" data-order = "asc">语文</th>
       <th data-id="Math" data-order = "dec">数学</th>
@@ -21,12 +22,13 @@
 
     <tbody id = "sc">
         {{#each str}}
-        <tr>
+        <tr  id ={{id}}>
+          <td>{{id}}</td>
           <td>{{name}}</td>
           <td>{{Chinese}}</td>
           <td>{{Math}}</td>
           <td>{{English}}</td>
-          <td > <input type="button" class="delete"  data-id="{{id}}" value="删除"> </td>
+          <td class ='mmd' data-id={{id}}> 删除 </td>
         </tr>
       {{/each}}
     </tbody>
