@@ -1,18 +1,21 @@
  var getNewArray = require('./sort.js');
  var express = require('express');
  var mysql = require('mysql');
-
+ var bodyParser = require('body-parser');
  var app = express();
  var connection;
 
  var hbs = require('hbs');
  app.set('view engine', 'html');
  app.engine('html', hbs.__express);
+ app.use(bodyParser.urlencoded({
+   extended: true
+ }));
 
  app.use(express.static('public'));
  app.use(express.static('bower_components'));
 
- app.get('*', function(res, req, next) {
+ app.all('*', function(res, req, next) {
    connection = mysql.createConnection({
      host: 'localhost',
      user: 'root',
@@ -81,19 +84,27 @@
  });
 
  app.post('/add', function(req, res) {
-   var student = req.query.student;
-   console.log(student);
-   connection.query('insert into student values(' + student.id + ',' + student.name + ')',
+   var stu = req.body;
+   console.log(stu);
+   connection.query('insert into student values(' + parseInt(stu.id) + ',' +
+   stu.name + ')',
      function(err, rows) {
        if (err) {
          throw err;
        }
-       connection.query('insert into score values(' + student.id + ',1,' + student.chinese + '),(' + student.id + ',2,' + studentmath + '),(' + id + ',3,' + student.english + ')',
-         function(err, rows) {
+       connection.query('insert into score(student_id,subject_id,score) values (' +
+        stu.id + ',1,' +
+       stu.chinese + '),(' +stu.id + ',2,' + stu.math + '),(' +
+        stu.id + ',3,' + stu.english + ')', function(err, rows) {
+
            if (err) {
              throw err;
            }
+           console.log(66666666666666);
+           res.send('true');
+           
            connection.end();
+
          });
      });
  });

@@ -120,13 +120,15 @@ $(function() {
       math: $('#math').val(),
       english: $('#english').val()
     };
+  console.log(student);
     $.ajax({
       url: '/add',
       data: student,
-      type: 'post',
-      dataType: 'text',
+      type: 'POST',
+      //dataType: 'text',
       success: function() {
-        $("tbody").append("<tr id=" + studnt.id + ">" +
+        alert('success');
+        $("tbody").append("<tr><td>" + student.id + "</td>"+
           "<td>" + student.name + "</td>" +
           "<td>" + student.chinese + "</td>" +
           "<td>" + student.math + "</td>" +
