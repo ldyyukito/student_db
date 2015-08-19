@@ -85,13 +85,14 @@
 
  app.post('/add', function(req, res) {
    var stu = req.body;
-   console.log(stu);
-   connection.query('insert into student values(' + parseInt(stu.id) + ',' +
-   stu.name + ')',
+   console.log(req.body.name);
+   connection.query('insert into student values(' + parseInt(stu.id) + ',"' +
+   req.body.name + '")',
      function(err, rows) {
        if (err) {
          throw err;
        }
+       console.log(1111111111111111);
        connection.query('insert into score(student_id,subject_id,score) values (' +
         stu.id + ',1,' +
        stu.chinese + '),(' +stu.id + ',2,' + stu.math + '),(' +
@@ -100,9 +101,9 @@
            if (err) {
              throw err;
            }
-           console.log(66666666666666);
+
            res.send('true');
-           
+
            connection.end();
 
          });
